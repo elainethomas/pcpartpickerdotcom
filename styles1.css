@@ -32,6 +32,13 @@ footer {
 	background-color: #aeaca8;
 }
 
-.useCase, h2, h4, p {
-	float: left;
+h2 {
+	margin-left: 40px;
+	margin-right: 140px;
+	margin-top: 100px;
+	margin-bottom: 300px;
+}
+
+.useCase.p, h2, h4 {
+	float: right;
 }
