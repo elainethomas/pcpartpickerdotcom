@@ -32,3 +32,6 @@ footer {
 	background-color: #aeaca8;
 }
 
+.useCase, h2, h4, p {
+	float: left;
+}

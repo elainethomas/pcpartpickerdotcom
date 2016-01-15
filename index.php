@@ -10,16 +10,17 @@
 	</head>
 	<body>
 		<img src="avatar-me.png" />
-		<div>
-			<h4>Novice PC Builder</h4>
+			<h2>Novice PC Builder</h2>
+			<h4>A student on a budget</h4>
+		<div class="useCase">
 			<p>
 				Student, has little to moderate experience building personal computers.
 			</p>
 		</div>
 	</body>
 	<footer>
+		<a href="http://pcpartpicker.com/">PC Part Picker Website</a><br><br>
 		&copy; 2016 el41net
-		<a href="http://pcpartpicker.com/">PC Part Picker Website</a>
 		<h1>Entity Relationship Diagram for PC Part Picker Website</h1>
 	</footer>
 </html>
