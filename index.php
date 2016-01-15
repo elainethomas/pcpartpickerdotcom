@@ -10,6 +10,12 @@
 	</head>
 	<body>
 		<img src="avatar-me.png" />
+		<div>
+			<h4>Novice PC Builder</h4>
+			<p>
+				Student, has little to moderate experience building personal computers.
+			</p>
+		</div>
 	</body>
 	<footer>
 		&copy; 2016 el41net
