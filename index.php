@@ -9,9 +9,11 @@
 		</title>
 	</head>
 	<body>
-		<p>
-			<a href="http://pcpartpicker.com/">PC Part Picker Website</a>
-		</p>
-		<h1>Entity Relationship Diagram for PC Part Picker Website</h1>
+		<img src="avatar-me.png" />
 	</body>
+	<footer>
+		&copy; 2016 el41net
+		<a href="http://pcpartpicker.com/">PC Part Picker Website</a>
+		<h1>Entity Relationship Diagram for PC Part Picker Website</h1>
+	</footer>
 </html>

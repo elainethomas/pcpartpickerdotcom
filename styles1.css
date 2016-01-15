@@ -3,12 +3,6 @@ body {
 	background-repeat: no-repeat;
 }
 
-h1 {
-	color: wheat;
-	font-family: 'Candal', sans-serif;
-	text-align: center;
-}
-
 img {
 	width: 600px;
 	height: 400px;
@@ -22,5 +16,15 @@ a {
 
 p {
 	text-align: center;
+}
+
+footer {
+	display: block;
+	height: 30px;
+	clear: both;
+	color: #968468;
+	font-family: 'Candal', sans-serif;
+	text-align: center;
+	background-color: #aeaca8;
 }
 
