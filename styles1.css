@@ -1,0 +1,26 @@
+body {
+	background-image: url("pcpartpickerdotcom.svg");
+	background-repeat: no-repeat;
+}
+
+h1 {
+	color: wheat;
+	font-family: 'Candal', sans-serif;
+	text-align: center;
+}
+
+img {
+	width: 600px;
+	height: 400px;
+}
+
+a {
+	color: #4648f5;
+	font-family: 'Candal', sans-serif;
+	font-size: 15px;
+}
+
+p {
+	text-align: center;
+}
+
