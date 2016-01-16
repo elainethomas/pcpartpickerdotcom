@@ -2,19 +2,19 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link href="styles1.css" type="text/css" rel="stylesheet" />
+		<!--<link href="styles1.css" type="text/css" rel="stylesheet" />-->
 		<link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
 		<title>
 			ERD for PC Part Picker Website
 		</title>
 	</head>
 	<body>
-		<img src="avatar-me.png" />
-			<h2>Novice PC Builder</h2>
+		<h3>A DIY PC Builder</h3>
+		<img src="pcpartpickerdotcom.svg" />
 			<h4>A student on a budget</h4>
-		<div class="useCase">
+		<div>
 			<p>
-				Student, has little to moderate experience building personal computers.
+				DIY PC Builder has been building PCs since she was 12 years old.  While she is confident in picking out
 			</p>
 		</div>
 	</body>
