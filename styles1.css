@@ -1,15 +1,37 @@
 body {
-	background-image: url("pcpartpickerdotcom.svg");
-	background-repeat: no-repeat;
+	background-color: antiquewhite;
+	/*background-image: url("pcpartpickerdotcom.svg");  //jk what a mess!
+	background-repeat: no-repeat; */
 }
 
-img {
-	width: 150px;
-	height: 150px;
+h1, footer{
+	text-align: center;
+}
+
+h2, h4 {
+	text-align: left;
+}
+
+h3 {
+font-style: oblique;
+}
+
+.erdSvg {
+	width: 800px;
+	height: 600px;
 	float: right;
 	margin-top: 75px;
-	margin-bottom: 300px;
+	margin-bottom: 100px;
 	margin-right: 120px;
+}
+
+.userPhoto {
+	width: 150px;
+	height: 150px;
+	float: left;
+	margin-top: 75px;
+	/*margin-bottom: 100px; */
+	margin-left: 120px;
 }
 
 a {
@@ -18,27 +40,24 @@ a {
 	font-size: 15px;
 }
 
-p {
-	text-align: center;
-}
-
 footer {
 	display: block;
 	height: 30px;
 	clear: both;
 	color: #968468;
 	font-family: 'Candal', sans-serif;
-	text-align: center;
 	background-color: #aeaca8;
 }
 
-h2 {
+ol {
+	text-align: left;
+}
+
+/*h2 {
 	margin-left: 40px;
 	margin-right: 140px;
 	margin-top: 100px;
 	margin-bottom: 300px;
-}
+} */
 
-.useCase.p, h2, h4 {
-	float: right;
-}
+
