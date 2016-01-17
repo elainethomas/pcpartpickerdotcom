@@ -6,9 +6,11 @@ body {
 
 h1, footer{
 	text-align: center;
+	background-color: #dddddd;
+	text-shadow: 2px 2px 7px #666666;
 }
 
-h2, h4 {
+h2, h4, p {
 	text-align: left;
 }
 
@@ -17,22 +19,25 @@ font-style: oblique;
 }
 
 .erdSvg {
-	width: 800px;
+	width: 1000px;
 	height: 600px;
 	float: right;
 	margin-top: 75px;
 	margin-bottom: 100px;
-	margin-right: 120px;
+	margin-right: 20px;
 }
 
 .userPhoto {
-	width: 150px;
-	height: 150px;
+	width: 100px;
+	height: 100px;
 	float: left;
-	margin-top: 75px;
-	/*margin-bottom: 100px; */
-	margin-left: 120px;
+	padding: 8px;
+	border: thick solid #666666;
+	margin: 40px 40px 20px 20px;
 }
+
+/*border-radius: 80%;*/
+
 
 a {
 	color: #4648f5;

@@ -13,10 +13,10 @@
 			<h1>Entity Relationship Diagram for PC Part Picker Website</h1>
 		</header>
 		<img src="pcpartpickerdotcom.svg" class="erdSvg"/>
+		<div id="sidebar">
 		<img src="avatar-me.png" class="userPhoto"/>
 		<h2>DIY PC Builder</h2>
 			<h3>A student on a budget</h3>
-			<div>
 				<p>
 				DIY PC Builder has been building PCs since she was 12 years old.  She knows what types of 				computer components she wants to include in her next build - a computer for school work and gaming.
 				</p>
@@ -37,9 +37,9 @@
 				</p>
 		</div>
 	</body>
-	<footer>
+		<footer>
 		<a href="http://pcpartpicker.com/">PC Part Picker Website</a><br><br>
 		&copy; 2016 el41net
 
-	</footer>
+		</footer>
 </html>
