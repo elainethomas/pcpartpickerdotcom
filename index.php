@@ -55,7 +55,7 @@
 				<li>User can use filter to search for a specific product type</li>
 				<li>User can use additional filters to limit choices to minimum requirements</li>
 				<li>User can see price, vendors, ratings, specifications and comments about the product</li>
-				<li>User can follow a link to vendor's POS website to make purchase</li>
+				<li>User can follow a link to vendor POS website to make purchase</li>
 			</ul>
 
 		</aside>
