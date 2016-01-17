@@ -16,26 +16,26 @@
 		<img src="pcpartpickerdotcom.svg" class="erdSvg"/>
 		<aside>
 		<img src="avatar-me.png" class="userPhoto"/>
-		<h2>DIY PC Builder</h2>
+		<h2>Lily - DIY PC Builder, 22 yrs. old</h2>
 			<h3 class="persona">A student on a budget</h3>
 				<p>
-				DIY PC Builder has been building PCs since she was 12 years old.  She already has most of the necessary components and she already knows what size of RAM she will need to support a scientifc graphing program she needs for school and her favorite PC games.
+				Lily has been building PCs since she was 12 years old.  Recently she was given some money as a graduation gift amd she would like to replace her existing system with a new build.  Lily knows what size of RAM she will need that will support the scientific graphing program she needs for graduate school and her favorite PC games.
 				</p>
 			<hr>
 			<h4>Needs</h4>
 				<ol>
-					<li>Meet minimum requirements for build
+					<li>Keep the RAM chip cost below 80$ to fit Lily's budget</li>
+					<li>Meet minimum requirements for Lily's build
 						<ul>
 							<li>correct amount of RAM</li>
 							<li>compatible with system build</li>
 						</ul>
 					</li>
-					<li>Keep the RAM chip cost below 60$ to fit budget</li>
 					<li>Get the best possible product based on user ratings</li>
 				</ol>
 			<h4>Frustrations</h4>
 				<p>
-					DIY PC Builder dislikes doing the time consuming research necessary to purchase individual computer components for a complete computer build.  The RAM chip she will ultimately decide to purchase should be compatible with her motherboard and also be the best rated by other experienced PC Builders.
+					As a DIY PC builder, Lily dislikes doing the time consuming research necessary to purchase individual computer components for a complete computer build.  The RAM chip she will ultimately decide to purchase should be compatible with her motherboard and also be the best rated by other experienced PC Builders.
 				</p>
 			<h4>Ideal Website</h4>
 			<ul>
