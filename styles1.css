@@ -1,12 +1,17 @@
+header, aside, nav {
+	display:block;
+}
+
 body {
 	background-color: antiquewhite;
-	/*background-image: url("pcpartpickerdotcom.svg");  //jk what a mess!
-	background-repeat: no-repeat; */
+}
+
+h1 {
+	background-color: #aeaca8
 }
 
 h1, footer{
 	text-align: center;
-	background-color: #dddddd;
 	text-shadow: 2px 2px 7px #666666;
 }
 
@@ -31,12 +36,12 @@ font-style: oblique;
 	width: 100px;
 	height: 100px;
 	float: left;
-	padding: 8px;
+	padding: 2px;
 	border: thick solid #666666;
 	margin: 40px 40px 20px 20px;
 }
 
-/*border-radius: 80%;*/
+/**/
 
 
 a {
@@ -58,11 +63,11 @@ ol {
 	text-align: left;
 }
 
-/*h2 {
-	margin-left: 40px;
-	margin-right: 140px;
-	margin-top: 100px;
-	margin-bottom: 300px;
-} */
+.aside {
+	width: 230px;
+	float: left;
+	border: solid 4px #666666;
+}
+
 
 
