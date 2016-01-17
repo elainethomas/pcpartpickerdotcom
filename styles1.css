@@ -15,11 +15,11 @@ h1, footer{
 	text-shadow: 2px 2px 7px #666666;
 }
 
-h2, h4, p {
+h2, h3, h4, p {
 	text-align: left;
 }
 
-h3 {
+.persona {
 font-style: oblique;
 }
 
@@ -38,11 +38,14 @@ font-style: oblique;
 	float: left;
 	padding: 2px;
 	border: thick solid #666666;
-	margin: 40px 40px 20px 20px;
+	margin: 20px 40px 20px 20px;
 }
 
-/**/
-
+.ram {
+	font-family: 'Wire One', sans-serif;
+	font-size: small;
+	color: black;
+}
 
 a {
 	color: #4648f5;

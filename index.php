@@ -4,6 +4,7 @@
 		<meta charset="utf-8" />
 		<link href="styles1.css" type="text/css" rel="stylesheet" />
 		<link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
 		<title>
 			ERD, Persona & Use Case - PC Part Picker
 		</title>
@@ -16,10 +17,11 @@
 		<aside>
 		<img src="avatar-me.png" class="userPhoto"/>
 		<h2>DIY PC Builder</h2>
-			<h3>A student on a budget</h3>
+			<h3 class="persona">A student on a budget</h3>
 				<p>
 				DIY PC Builder has been building PCs since she was 12 years old.  She already has most of the necessary components and she already knows what size of RAM she will need to support a scientifc graphing program she needs for school and her favorite PC games.
-				</p><br>
+				</p>
+			<hr>
 			<h4>Needs</h4>
 				<ol>
 					<li>Meet minimum requirements for build
@@ -44,14 +46,22 @@
 				<li>Prices from a wide swath of vendors for comparison shopping</li>
 				<li>One click ordering</li>
 			</ul>
+			<hr>
+			<h3>
+				Conceptual Model
+			</h3>
+			<ul>
+				<li>User can see many product types</li>
+				<li>User can use filter to search for a specific product type</li>
+				<li>User can use additional filters to limit choices to minimum requirements</li>
+				<li>User can see price, vendors, ratings, specifications and comments about the product</li>
+				<li>User can follow a link to vendor's POS website to make purchase</li>
+			</ul>
+
 		</aside>
-		<hr>
-
-
-
 	</body>
 		<footer>
-		<a href="http://pcpartpicker.com/">PC Part Picker Website</a><br><br>
+		<a href="http://pcpartpicker.com/part/gskill-memory-f312800cl9d8gbxl">PC Part Picker - <span class="ram">G.Skill Ripjaws X Series 8GB (2 x 4GB) DDR3-1600 Memory</span></a><br><br>
 		&copy; 2016 el41net
 
 		</footer>
