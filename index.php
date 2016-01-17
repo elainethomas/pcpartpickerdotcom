@@ -35,7 +35,7 @@
 				</ol>
 			<h4>Frustrations</h4>
 				<p>
-					As a DIY PC builder, Lily dislikes doing the time consuming research necessary to purchase individual computer components for a complete computer build.  The RAM chip she will ultimately decide to purchase should be compatible with her motherboard and also be the best rated by other experienced PC Builders.
+					As a DIY PC builder, Lily dislikes doing the time consuming research necessary to purchase individual computer components for a complete computer build.  Pouring over documentation and visiting several PC parts websites to read specifications and find the best prices can take hours.  Lily has a limited budget so other user's ratings will be important for her to decide on the best possible product within her budget.
 				</p>
 			<h4>Ideal Website</h4>
 			<ul>
