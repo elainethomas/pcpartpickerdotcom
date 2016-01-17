@@ -19,7 +19,7 @@
 		<h2>Lily - DIY PC Builder, 22 yrs. old</h2>
 			<h3 class="persona">A student on a budget</h3>
 				<p>
-				Lily has been building PCs since she was 12 years old.  Recently she was given money as a graduation gift amd she would like to replace her existing system with a new build.  Lily knows what size of RAM she will need that will support the scientific graphing program she needs for graduate school and her favorite PC games.
+				Lily has been building PCs since she was 12 years old.  Recently she was given money as a graduation gift and she would like to replace her existing computer with a new build.  Lily knows what size of RAM that will support the scientific graphing program she needs for graduate school and her favorite PC games.
 				</p>
 			<hr>
 			<h4>Needs</h4>
