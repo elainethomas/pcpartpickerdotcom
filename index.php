@@ -5,7 +5,7 @@
 		<link href="styles1.css" type="text/css" rel="stylesheet" />
 		<link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
 		<title>
-			ERD for PC Part Picker Website
+			ERD, Persona & Use Case - PC Part Picker
 		</title>
 	</head>
 	<body>
@@ -35,7 +35,20 @@
 				<p>
 					DIY PC Builder dislikes doing the time consuming research necessary to purchase individual computer components for a complete computer build.  The RAM chip she will ultimately decide to purchase should be compatible with her motherboard and also be the best rated by other experienced PC Builders.
 				</p>
+			<h4>Ideal Website</h4>
+			<ul>
+				<li>Offer many choices for the size of RAM she needs</li>
+				<li>Search and filter tools to hide products that don't fit her minimum requirements</li>
+				<li>Show the rating and number of ratings each product has</li>
+				<li>Compatible with system build</li>
+				<li>Prices from a wide swath of vendors for comparison shopping</li>
+				<li>One click ordering</li>
+			</ul>
 		</aside>
+		<hr>
+
+
+
 	</body>
 		<footer>
 		<a href="http://pcpartpicker.com/">PC Part Picker Website</a><br><br>
