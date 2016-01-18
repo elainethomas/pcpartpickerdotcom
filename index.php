@@ -47,17 +47,66 @@
 				<li>One click ordering</li>
 			</ul>
 			<hr>
-			<h3>
-				Conceptual Model
-			</h3>
+			<h3>Use Case 1</h3>
+			<h2>Basic Flow</h2>
 			<ul>
-				<li>User can see many product types</li>
-				<li>User can use filter to search for a specific product type</li>
-				<li>User can use additional filters to limit choices to minimum requirements</li>
-				<li>User can see price, vendors, ratings, specifications and comments about the product</li>
-				<li>User can follow a link to vendor POS website to make purchase</li>
+				<li>Lily selects the individual parts heading from the landing page.
+					<ul>
+						<li>When hovering over the individual parts link a graphical menu with key word names opens up.
+							<ul>
+								<li>Lily selects the type of part she is looking for
+									<ul>
+										<li>The website directs her to a large filterable listing of all products of the selected type.
+											<ul>
+												<li>Lily uses her minimum requirements for her build to filter the list.
+													<ul>
+														<li>Lily uses the product's user ratings and comments to guide her decision.
+															<ul>
+																<li>When she has made up her mind, Lily selects the name of the chosen product vendor
+																	<ul>
+																		<li>The link takes her directly to the product listing on the vendor's site for easy check out.</li>
+																	</ul>
+																</li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
 			</ul>
-
+			<h3>Use Case 2</h3>
+			<h2>Alternate Flow</h2>
+			<ul>
+				<li>
+					After landing on the homepage, Lily uses the site search tool at the top of the page to look for the size and type of product she is looking for.
+						<ul>
+							<li>
+								The website takes her to a list that is indicated to be 5 pages long of parts that fit her search terms.  The list includes the vendor, price and shopping cart button.
+									<ul>
+										<li>Lily browses the list till she finds a product she is interested in, and selects it.
+											<ul>
+												<li>She can now see that the product fits her search terms and all of her minimum requirements.
+													<ul>
+														<li>Lily selects the name of the chosen product vendor.
+															<ul>
+																<li>The link takes her directly to the product listing on the vendor's site for easy check out.</li>
+															</ul>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</li>
+									</ul>
+							</li>
+						</ul>
+				</li>
+			</ul>
 		</aside>
 	</body>
 		<footer>
