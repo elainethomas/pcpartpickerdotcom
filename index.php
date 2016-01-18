@@ -84,7 +84,7 @@
 			<h3>Alternate Flow</h3>
 			<ul>
 				<li>
-					After landing on the homepage, Lily uses the site search tool at the top of the page to look for the size and type of product she is looking for.
+					After landing on the homepage, Lily uses the site search tool at the top of the page to enter the size and type of product she is looking for.
 						<ul>
 							<li>
 								The website takes her to a list that is indicated to be 5 pages long of parts that fit her search terms.  The list includes the vendor, price and shopping cart button.
