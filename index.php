@@ -47,8 +47,8 @@
 				<li>One click ordering</li>
 			</ul>
 			<hr>
-			<h3>Use Case 1</h3>
-			<h2>Basic Flow</h2>
+			<h2>Use Case 1</h2>
+			<h3>Basic Flow</h3>
 			<ul>
 				<li>Lily selects the individual parts heading from the landing page.
 					<ul>
@@ -80,8 +80,8 @@
 					</ul>
 				</li>
 			</ul>
-			<h3>Use Case 2</h3>
-			<h2>Alternate Flow</h2>
+			<h2>Use Case 2</h2>
+			<h3>Alternate Flow</h3>
 			<ul>
 				<li>
 					After landing on the homepage, Lily uses the site search tool at the top of the page to look for the size and type of product she is looking for.
@@ -112,6 +112,5 @@
 		<footer>
 		<a href="http://pcpartpicker.com/part/gskill-memory-f312800cl9d8gbxl">PC Part Picker - <span class="ram">G.Skill Ripjaws X Series 8GB (2 x 4GB) DDR3-1600 Memory</span></a><br><br>
 		&copy; 2016 el41net
-
 		</footer>
 </html>
