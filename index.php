@@ -42,58 +42,24 @@
 		<ul>
 			<li>Lily selects the individual parts heading from the landing page.
 				<ul>
-					<li>When hovering over the individual parts link a graphical menu with key word names opens up.
-						<ul>
-							<li>Lily selects the type of part she is looking for
-								<ul>
-									<li>The website directs her to a large filterable listing of all products of the selected type.
-										<ul>
-											<li>Lily uses her minimum requirements for her build to filter the list.
-												<ul>
-													<li>Lily uses the product's user ratings and comments to guide her decision.
-														<ul>
-															<li>When she has made up her mind, Lily selects the name of the chosen product vendor
-																<ul>
-																	<li>The link takes her directly to the product listing on the vendor's site for easy check out.</li>
-																</ul>
-															</li>
-														</ul>
-													</li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</li>
-		</ul><br>
+					<li>When hovering over the individual parts link a graphical menu with key word names opens up.</li>
+					<li>Lily selects the type of part she is looking for.</li>
+					<li>The website directs her to a large filterable listing of all products of the selected type.</li>
+					<li>Lily uses her minimum requirements for her build to filter the list.</li>
+					<li>Lily uses the product's user ratings and comments to guide her decision.</li>
+					<li>When she has made up her mind, Lily selects the name of the chosen product vendor.</li>
+					<li>The link takes her directly to the product listing on the vendor's site for easy check out.</li>
+				</ul><br>
 		<h3>Use Case 2</h3>
 		<h4>Alternate Flow</h4>
 		<ul>
-			<li> After landing on the homepage, Lily uses the site search tool at the top of the page to enter the size and type of product she is looking for.
-				<ul>
-					<li>The website takes her to a list that is indicated to be 5 pages long of parts that fit her search terms. The list includes the vendor, price and shopping cart button.
-						<ul>
-							<li>Lily browses the list till she finds a product she is interested in, and selects it.
-								<ul>
-									<li>She can now see that the product fits her search terms and all of her minimum requirements.
-										<ul>
-											<li>Lily selects the name of the chosen product vendor.
-												<ul>
-													<li>The link takes her directly to the product listing on the vendor's site for easy check out.</li>
-												</ul>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</li>
+			<li> After landing on the homepage, Lily uses the site search tool at the top of the page to enter the size and type of product she is looking for.</li>
+			<li>The website takes her to a list that is indicated to be 5 pages long of parts that fit her search terms. The list includes the vendor, price and shopping cart button.</li>
+			<li>Lily browses the list till she finds a product she is interested in, and selects it.</li>
+			<li>She can now see that the product fits her search terms and all of her minimum requirements.</li>
+			<li>Lily selects the name of the chosen product vendor.</li>
+			<li>The link takes her directly to the product listing on the vendor's site for easy check out.</li>
+
 		</ul>
 	</body>
 	<footer>
