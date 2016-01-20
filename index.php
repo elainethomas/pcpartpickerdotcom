@@ -4,6 +4,7 @@
 		<meta charset="utf-8" />
 		<link href="styles1.css" type="text/css" rel="stylesheet" />
 		<link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Coda' rel='stylesheet' type='text/css'>
 		<title>
 			ERD for PC Part Picker Website
 		</title>
@@ -14,7 +15,7 @@
 		</header>
 		<img src="pcpartpickerdotcom.svg" class="erdSvg"/>
 		<img src="avatar-me.png" class="userPhoto"/>
-		<h2>DIY PC Builder</h2>
+		<h2>Lily - DIY PC Builder, 22 yrs. old</h2>
 			<h3>A student on a budget</h3>
 			<div>
 				<p>
@@ -96,7 +97,7 @@
 		</ul>
 	</body>
 	<footer>
-		<a href="http://pcpartpicker.com/">PC Part Picker Website</a><br><br>
+		<a href="http://pcpartpicker.com/part/gskill-memory-f312800cl9d8gbxl">PC Part Picker Website<span class="foot">G.Skill Ripjaws X Series 8GB (2 x 4GB) DDR3-1600 Memory</span></a><br><br>
 		&copy; 2016 el41net
 
 	</footer>
