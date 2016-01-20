@@ -1,7 +1,5 @@
 body {
 	background-color: antiquewhite;
-	/*background-image: url("pcpartpickerdotcom.svg");  //jk what a mess!
-	background-repeat: no-repeat; */
 }
 
 h1, footer{
@@ -52,12 +50,5 @@ footer {
 ol {
 	text-align: left;
 }
-
-/*h2 {
-	margin-left: 40px;
-	margin-right: 140px;
-	margin-top: 100px;
-	margin-bottom: 300px;
-} */
 
 

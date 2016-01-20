@@ -18,24 +18,82 @@
 			<h3>A student on a budget</h3>
 			<div>
 				<p>
-				DIY PC Builder has been building PCs since she was 12 years old.  She knows what types of 				computer components she wants to include in her next build - a computer for school work and gaming.
+					Lily has been building PCs since she was 12 years old. Recently she was given money as a graduation gift and she would like to replace her existing computer with a new build. Lily knows what size of RAM that will support the scientific graphing program she needs for graduate school and her favorite PC games.
 				</p>
 			<h4>Needs</h4>
 				<ol>
+					<li>Keep the RAM chip cost below 60$ to fit budget</li>
 					<li>Meet minimum requirements for build
 						<ul>
 							<li>correct amount of RAM</li>
 							<li>compatible with system build</li>
 						</ul>
 					</li>
-					<li>Keep the RAM chip cost below 60$ to fit budget</li>
 					<li>Get the best possible product based on user ratings</li>
 				</ol>
 			<h4>Frustrations</h4>
 				<p>
-					DIY PC Builder dislikes doing the time consuming research necessary to purchase individual computer components for a complete computer build.  The RAM chip she will ultimately decide to purchase should be compatible with her motherboard and also be the best rated by other experienced PC Builders.
+					As a DIY PC builder, Lily dislikes doing the time consuming research necessary to purchase individual computer components for a complete computer build. Pouring over documentation and visiting several PC parts websites to read specifications and find the best prices can take hours. Lily has a limited budget so other user's ratings will be important for her to decide on the best possible product within her budget.
 				</p>
 		</div>
+		<h3>Use Case 1</h3>
+		<h4>Basic Flow</h4>
+		<ul>
+			<li>Lily selects the individual parts heading from the landing page.
+				<ul>
+					<li>When hovering over the individual parts link a graphical menu with key word names opens up.
+						<ul>
+							<li>Lily selects the type of part she is looking for
+								<ul>
+									<li>The website directs her to a large filterable listing of all products of the selected type.
+										<ul>
+											<li>Lily uses her minimum requirements for her build to filter the list.
+												<ul>
+													<li>Lily uses the product's user ratings and comments to guide her decision.
+														<ul>
+															<li>When she has made up her mind, Lily selects the name of the chosen product vendor
+																<ul>
+																	<li>The link takes her directly to the product listing on the vendor's site for easy check out.</li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul><br>
+		<h3>Use Case 2</h3>
+		<h4>Alternate Flow</h4>
+		<ul>
+			<li> After landing on the homepage, Lily uses the site search tool at the top of the page to enter the size and type of product she is looking for.
+				<ul>
+					<li>The website takes her to a list that is indicated to be 5 pages long of parts that fit her search terms. The list includes the vendor, price and shopping cart button.
+						<ul>
+							<li>Lily browses the list till she finds a product she is interested in, and selects it.
+								<ul>
+									<li>She can now see that the product fits her search terms and all of her minimum requirements.
+										<ul>
+											<li>Lily selects the name of the chosen product vendor.
+												<ul>
+													<li>The link takes her directly to the product listing on the vendor's site for easy check out.</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
 	</body>
 	<footer>
 		<a href="http://pcpartpicker.com/">PC Part Picker Website</a><br><br>
