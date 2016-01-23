@@ -22,12 +22,12 @@ class RamChip {
 	 * product manufacturer name
 	 * @var string $manufacturer
 	 */
-	private $manufacturer;
+	private $manufacturerName;
 	/**
 	 * the particular design or version of product
 	 * @var string $model
 	 */
-	private $model;
+	private $modelName;
 	/**
 	 * the sale price supplied by manufacturer
 	 * @var int $price
@@ -39,18 +39,17 @@ class RamChip {
 	 *
 	 * @param int $newProductId id of this RamChip or null if a new RamChip
 	 * @param string $newProductName string containing the product name
-	 * @param string $newManufacturer string containing the name of the product manufacturer
+	 * @param $newManufacturerName
 	 * @param string $newModelName string containing the product name
 	 * @param int $newPrice current sale price of product
-	 * @throws InvalidArgumentException if data types are not valid
-	 * @throws RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 	 * @throws Exception if some other exception is thrown
-	 **/
-	public function __construct($newProductId, $newProductName, $newManufacturer, $newModelName, $newPrice = null) {
+	 * @internal param string $newManufacturer string containing the name of the product manufacturer
+	 */
+	public function __construct($newProductId, $newProductName, $newManufacturerName, $newModelName, $newPrice = null) {
 		try {
 			$this->setProductId($newProductId);
 			$this->setProductName($newProductName);
-			$this->setManufacturer($newManufacturer);
+			$this->setManufacturerName($newManufacturerName);
 			$this->setModelName($newModelName);
 			$this->setPrice($newPrice);
 		} catch(InvalidArgumentException $invalidArgument) {
@@ -84,31 +83,30 @@ class RamChip {
 	public function setProductId($newProductId) {
 		// base case: if the product id is null, this is a new product without a mySQL assigned id (yet)
 		if($newProductId === null) {
-			$this->ProductId = null;
+			$this->productId = null;
 			return;
 		}
 
-	//verify the product id is valid
-
-		$newProductId = filter_var($newProductId). FILTER_VALIDATE_INT);
+		// verify the product id is valid
+		$newProductId = filter_var($newProductId, FILTER_VALIDATE_INT);
 		if($newProductId === false) {
-				throw(new InvalidArgumentException("product id is not a valid integer"));
-			}
+			throw(new InvalidArgumentException("product id is not a valid integer"));
+		}
 
 	//verify the product id is positive
 		if($newProductId <= 0) {
 			throw(new RangeException ("product id is not positive"));
+		}
 
 	//convert and store the product id
 		$this->productId = intval($newProductId);
 	}
-	}
 
-		/**
-		 * accessor method for tweet content
-		 *
-		 * @return string value of tweet content
-		 **/
+	/**
+	 * accessor method for tweet content
+	 *
+	 * @return string value of tweet content
+	 **/
 	public function getProductName() {
 			return($this->productName);
 		}
@@ -116,14 +114,14 @@ class RamChip {
 	/**
 	 * mutator method for product name
 	 *
-	 * @param string $newTweetContent new name
+	 * @param string $newProductName new name
 	 * @throws InvalidArgumentException if $newProductName is not a string or insecure
 	 * @throws RangeException if $newProductName is > 128 characters
 	 **/
 	public function setProductName($newProductName) {
 			// verify the product name content is secure
 			$newProductName = trim($newProductName);
-			$newProductName = filter_var($newProductName FILTER_SANITIZE_STRING);
+			$newProductName = filter_var($newProductName, FILTER_SANITIZE_STRING);
 			if(empty($newProductName) === true) {
 				throw(new InvalidArgumentException("product name content is empty or insecure"));
 			}
@@ -142,32 +140,32 @@ class RamChip {
 	 *
 	 * @return string value manufacturer name
 	 **/
-	public function getManufacturer() {
-		return($this->manufacturer);
+	public function getManufacturerName() {
+		return($this->manufacturerName);
 	}
 
 	/**
 	 * mutator method for manufacturer name
 	 *
-	 * @param string $newManufacturer name
-	 * @throws InvalidArgumentException if $newManufacturer is not a string or insecure
-	 * @throws RangeException if $newManufacturer is > 128 characters
+	 * @param string $newManufacturerName
+	 * @throws InvalidArgumentException if $newManufacturerName is not a string or insecure
+	 * @throws RangeException if $newManufacturerName is > 128 characters
 	 **/
 	public function setManufacturerName($newManufacturerName) {
 		// verify the product name content is secure
 		$newManufacturerName = trim($newManufacturerName);
-		$newManufacturerName = filter_var($newManufacturerName FILTER_SANITIZE_STRING);
+		$newManufacturerName = filter_var($newManufacturerName,FILTER_SANITIZE_STRING);
 			if(empty($newManufacturerName) === true) {
 				throw(new InvalidArgumentException("manufacturer name content is empty or insecure"));
 			}
 
-			// verify the tweet content will fit in the database
-			if(strlen($newProductName) > 128) {
+		// verify the tweet content will fit in the database
+			if(strlen($newManufacturerName) > 128) {
 				throw(new RangeException("product name content too large"));
 			}
 
 			// store the tweet content
-			$this->productName = $newProductName;
+			$this->manufacturerName = $newManufacturerName;
 		}
 
 
