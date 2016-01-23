@@ -52,6 +52,7 @@ class RamChip {
 			$this->setProductName($newProductName);
 			$this->setManufacturer($newManufacturer);
 			$this->setModelName($newModelName);
+			$this->setPrice($newPrice);
 		} catch(InvalidArgumentException $invalidArgument) {
 			// rethrow the exception to the caller
 			throw(new InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
@@ -81,15 +82,94 @@ class RamChip {
 	 * @throws RangeException if product id is negative
 	 **/
 	public function setProductId($newProductId) {
-		//first apply the filer to the input
-		$newProductId = filter_var($newProductId, FILTER_VALIDATE_INT);
+		// base case: if the product id is null, this is a new product without a mySQL assigned id (yet)
+		if($newProductId === null) {
+			$this->ProductId = null;
+			return;
+		}
 
-		//if filter var()rejects the new id, throw an Exception
-		if ($newProductId <= 0) {
-				throw(new RangeException("product id must be positive"));
+	//verify the product id is valid
+
+		$newProductId = filter_var($newProductId). FILTER_VALIDATE_INT);
+		if($newProductId === false) {
+				throw(new InvalidArgumentException("product id is not a valid integer"));
+			}
+
+	//verify the product id is positive
+		if($newProductId <= 0) {
+			throw(new RangeException ("product id is not positive"));
+
+	//convert and store the product id
+		$this->productId = intval($newProductId);
 	}
-		//finally, if we got here, we know it's a valid id - save it to the object
-		$this->productId = $newProductId;
 	}
+
+		/**
+		 * accessor method for tweet content
+		 *
+		 * @return string value of tweet content
+		 **/
+	public function getProductName() {
+			return($this->productName);
+		}
+
+	/**
+	 * mutator method for product name
+	 *
+	 * @param string $newTweetContent new name
+	 * @throws InvalidArgumentException if $newProductName is not a string or insecure
+	 * @throws RangeException if $newProductName is > 128 characters
+	 **/
+	public function setProductName($newProductName) {
+			// verify the product name content is secure
+			$newProductName = trim($newProductName);
+			$newProductName = filter_var($newProductName FILTER_SANITIZE_STRING);
+			if(empty($newProductName) === true) {
+				throw(new InvalidArgumentException("product name content is empty or insecure"));
+			}
+
+			// verify the tweet content will fit in the database
+			if(strlen($newProductName) > 128) {
+				throw(new RangeException("product name content too large"));
+			}
+
+			// store the tweet content
+			$this->productName = $newProductName;
+		}
+
+	/**
+	 * accessor method for manufacturer content
+	 *
+	 * @return string value manufacturer name
+	 **/
+	public function getManufacturer() {
+		return($this->manufacturer);
+	}
+
+	/**
+	 * mutator method for manufacturer name
+	 *
+	 * @param string $newManufacturer name
+	 * @throws InvalidArgumentException if $newManufacturer is not a string or insecure
+	 * @throws RangeException if $newManufacturer is > 128 characters
+	 **/
+	public function setManufacturerName($newManufacturerName) {
+		// verify the product name content is secure
+		$newManufacturerName = trim($newManufacturerName);
+		$newManufacturerName = filter_var($newManufacturerName FILTER_SANITIZE_STRING);
+			if(empty($newManufacturerName) === true) {
+				throw(new InvalidArgumentException("manufacturer name content is empty or insecure"));
+			}
+
+			// verify the tweet content will fit in the database
+			if(strlen($newProductName) > 128) {
+				throw(new RangeException("product name content too large"));
+			}
+
+			// store the tweet content
+			$this->productName = $newProductName;
+		}
+
+
 
 }
