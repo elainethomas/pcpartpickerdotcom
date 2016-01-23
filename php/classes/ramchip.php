@@ -152,22 +152,85 @@ class RamChip {
 	 * @throws RangeException if $newManufacturerName is > 128 characters
 	 **/
 	public function setManufacturerName($newManufacturerName) {
-		// verify the product name content is secure
+		// verify the manufacturer name content is secure
 		$newManufacturerName = trim($newManufacturerName);
 		$newManufacturerName = filter_var($newManufacturerName,FILTER_SANITIZE_STRING);
 			if(empty($newManufacturerName) === true) {
 				throw(new InvalidArgumentException("manufacturer name content is empty or insecure"));
 			}
 
-		// verify the tweet content will fit in the database
+		// verify the manufacturer name content will fit in the database
 			if(strlen($newManufacturerName) > 128) {
-				throw(new RangeException("product name content too large"));
+				throw(new RangeException("manufacturer name content too large"));
 			}
 
-			// store the tweet content
+			// store the manufacturer name content
 			$this->manufacturerName = $newManufacturerName;
 		}
 
+	/**
+	 * accessor method for model name content
+	 *
+	 * @return string value model name
+	 **/
+	public function getModelName() {
+		return($this->modelName);
+	}
 
+	/**
+	 * mutator method for model name
+	 *
+	 * @param string $newModelName
+	 * @throws InvalidArgumentException if $newModelName is not a string or insecure
+	 * @throws RangeException if $newModelName is > 128 characters
+	 **/
+	public function setModelName($newModelName) {
+		// verify the product name content is secure
+		$newModelName = trim($newModelName);
+		$newModelName = filter_var($newModelName,FILTER_SANITIZE_STRING);
+		if(empty($newModelName) === true) {
+			throw(new InvalidArgumentException("model name content is empty or insecure"));
+		}
 
+		// verify the model name content will fit in the database
+		if(strlen($newModelName) > 128) {
+			throw(new RangeException("model name content too large"));
+		}
+
+		// store the model name content
+		$this->modelName = $newModelName;
+	}
+
+	/**
+	 * accessor method for model name content
+	 *
+	 * @return int value model name
+	 **/
+	public function getPrice() {
+		return($this->price);
+	}
+
+	/**
+	 * mutator method for RamChip price
+	 *
+	 * @param double $newPrice new price of RamChip
+	 * @throws InvalidArgumentException if $newPrice is not a double
+	 * @throws RangeException if $newPrice is not positive
+	**/
+	public function setPrice($newPrice) {
+		// verify the price value is valid
+		$newPrice = filter_var($newPrice, FILTER_VALIDATE_INT);
+		if($newPrice === false) {
+			throw(new InvalidArgumentException("price value is not a valid integer"));
+		}
+
+		// verify the price value is positive
+		if($newPrice <= 0) {
+			throw(new RangeException("price value cannot be negative"));
+		}
+
+		// convert and store the price value
+		$this->price = doubleval($newPrice);
+
+}
 }
