@@ -184,6 +184,7 @@ class RamChip {
 	 * @throws InvalidArgumentException if $newModelName is not a string or insecure
 	 * @throws RangeException if $newModelName is > 128 characters
 	 **/
+
 	public function setModelName($newModelName) {
 		// verify the product name content is secure
 		$newModelName = trim($newModelName);
@@ -233,4 +234,77 @@ class RamChip {
 		$this->price = doubleval($newPrice);
 
 }
-}
+
+	// ///////////////////////////////////////////////////////////////
+
+	/**
+	 * inserts this RamChip into mySQL
+	 *
+	 * @param PDO $pdo PDO connection object
+	 * @throws PDOException when mySQL related errors occur
+	 **/
+	public function insert(PDO $pdo) {
+		// enforce the productId is null (i.e., don't insert a product id that already exists)
+		if($this->productId !== null) {  //**IT NEEDS TO NOT EXIST!!
+			throw(new PDOException("not a new product id"));
+			//DO NOT INSERT THE SAME KEY TWICE
+		}
+
+		// create query template
+		$query	 = "INSERT INTO ramChip(productName, manufacturerName, modelName, price ) VALUES(:productName, :manufacturerName, :modelName, :price)";
+		$statement = $pdo->prepare($query);
+		//THERE IS NO PRIMARY KEY HERE BC WE ARE GOING TO INSERT IT
+
+		// bind the member variables to the place holders in the template
+		$parameters = array("productName" => $this->productName, "manufacturerName" => $this->manufacturerName, "modelName" => $this->modelName, "price" => $this->price);
+		$statement->execute($parameters); //EXECUTE IS THE LIVE STEP TO THE DATABASE
+
+		// update the null tweetId with what mySQL just gave us
+		$this->tweetId = intval($pdo->lastInsertId()); //this permanently resolves the "EXISTENTIAL PROBLEM"
+	}
+
+
+	/**
+	 * deletes this Tweet from mySQL
+	 *
+	 * @param PDO $pdo PDO connection object
+	 * @throws PDOException when mySQL related errors occur
+	 **/
+	public function delete(PDO $pdo) {
+		// enforce the tweetId is not null (i.e., don't delete a tweet that hasn't been inserted)
+		if($this->tweetId === null) {  //**IT NEEDS TO BE SURE IT DOES EXIST
+			throw(new PDOException("unable to delete a tweet that does not exist"));
+		}
+
+		// create query template
+		$query	 = "DELETE FROM tweet WHERE tweetId = :tweetId";  //WITHOUT THE WHERE CLAUSE IT WILL DELETE ALL TWEETS
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holder in the template
+		$parameters = array("tweetId" => $this->tweetId);
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * updates this Tweet in mySQL
+	 *
+	 * @param PDO $pdo PDO connection object
+	 * @throws PDOException when mySQL related errors occur
+	 **/
+	public function update(PDO $pdo) {
+		// enforce the tweetId is not null (i.e., don't update a tweet that hasn't been inserted)
+		if($this->tweetId === null) {
+			throw(new PDOException("unable to update a tweet that does not exist"));
+		}
+
+		// create query template  **IF THERE IS NO WHERE CLAUSE IT WILL UPDATE THE WHOLE THING
+		$query	 = "UPDATE tweet SET profileId = :profileId, tweetContent = :tweetContent, tweetDate = :tweetDate WHERE tweetId = :tweetId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$formattedDate = $this->tweetDate->format("Y-m-d H:i:s");
+		$parameters = array("profileId" => $this->profileId, "tweetContent" => $this->tweetContent, "tweetDate" => $formattedDate, "tweetId" => $this->tweetId);
+		$statement->execute($parameters);
+
+	}
+
