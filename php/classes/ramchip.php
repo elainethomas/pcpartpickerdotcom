@@ -1,9 +1,13 @@
 <?php
+require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
+require_once("ramchip.php");
+$pdo = connectToEncryptedMySQL("/etc/apache2/data-design/enajera2.ini");
+
 /**
  * RamChip, a temporary memory module
  *
- *A ramChip refers to RAM (random access memory) pluggable, essential computer component.
- *A ramChip is a saleable product.
+ *A RamChip refers to RAM (random access memory) pluggable, essential computer component.
+ *A RamChip is a saleable product.
  *
  *@author Elaine Thomas <enajera2@cnm.edu>
  **/
