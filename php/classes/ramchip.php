@@ -302,9 +302,8 @@ class RamChip {
 		// bind the member variables to the place holders in the template
 		$parameters = array("productName" => $this->productName, "manufacturerName" => $this->manufacturerName, "modelName" => $this->modelName, "price" => $this->price);
 		$statement->execute($parameters);
-
 	}
-// ///////////////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * gets the RamChip by product name
 	 *
@@ -313,7 +312,7 @@ class RamChip {
 	 * @return SplFixedArray all RamChipS found for this name
 	 * @throws PDOException when mySQL related errors occur
 	 **/
-	public static function getProductByProductName(PDO $pdo, $productName) {
+	public static function getRamChipByProductName(PDO $pdo, $productName) {
 		// sanitize the description before searching
 		$productName = trim($productName);
 		$productName = filter_var($productName, FILTER_SANITIZE_STRING);
@@ -347,45 +346,74 @@ class RamChip {
 	}
 
 	/**
-	 * gets the Tweet by tweetId
+	 * gets the RamChip by productId
 	 *
 	 * @param PDO $pdo PDO connection object
-	 * @param int $tweetId tweet id to search for
-	 * @return mixed Tweet found or null if not found
+	 * @param int $productId product id to search for
+	 * @return mixed RamChip found or null if not found
 	 * @throws PDOException when mySQL related errors occur
 	 **/
-	public static function getTweetByTweetId(PDO $pdo, $tweetId) {
+	public static function getRamChipByProductId(PDO $pdo, $productId) {
 		// sanitize the tweetId before searching
-		$tweetId = filter_var($tweetId, FILTER_VALIDATE_INT);
-		if($tweetId === false) {
-			throw(new PDOException("tweet id is not an integer"));
+		$productId = filter_var($productId, FILTER_VALIDATE_INT);
+		if($productId === false) {
+			throw(new PDOException("product id is not an integer"));
 		}
-		if($tweetId <= 0) {
-			throw(new PDOException("tweet id is not positive"));
+		if($productId <= 0) {
+			throw(new PDOException("product id is not positive"));
 		}
 
 		// create query template
-		$query	 = "SELECT tweetId, profileId, tweetContent, tweetDate FROM tweet WHERE tweetId = :tweetId";
+		$query	 = "SELECT productId, productName, manufacturerName, modelName, price FROM ramChip WHERE productId = :productId";
 		$statement = $pdo->prepare($query);
 
-		// bind the tweet id to the place holder in the template
-		$parameters = array("tweetId" => $tweetId);
+		// bind the product id to the place holder in the template
+		$parameters = array("productId" => $productId);
 		$statement->execute($parameters);
 
 		// grab the tweet from mySQL
 
 		try {
-			$tweet = null;
+			$ramChip = null;
 			$statement->setFetchMode(PDO::FETCH_ASSOC);
 			$row   = $statement->fetch();
 			if($row !== false) {
-				$tweet = new Tweet($row["tweetId"], $row["profileId"], $row["tweetContent"], $row["tweetDate"]);
+				$ramChip = new RamChip($row["productId"], $row["productName"], $row["manufacturerName"], $row["modelName"], $row["price"]);
 			}
 		} catch(Exception $exception) {
 			// if the row couldn't be converted, rethrow it
 			throw(new PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($tweet);
+		return($ramChip);
+	}
+
+	/**
+	 * gets all Tweets
+	 *
+	 * @param PDO $pdo PDO connection object
+	 * @return SplFixedArray all RamChipS found
+	 * @throws PDOException when mySQL related errors occur
+	 **/
+	public static function getAllRamChipS(PDO $pdo) {
+		// create query template
+		$query = "SELECT productId, productName, manufacturerName, modelName, price FROM ramChip";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of tweets
+		$ramChipS = new SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$ramChip = new RamChip($row["productId"], $row["productName"], $row["manufacturerName"], $row["modelName"], $row["price"]);
+				$ramChipS[$ramChipS->key()] = $ramChip;
+				$ramChip->next();
+			} catch(Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($ramChipS);
 	}
 }
 
