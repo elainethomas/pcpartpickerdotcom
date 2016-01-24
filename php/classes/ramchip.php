@@ -306,44 +306,44 @@ class RamChip {
 	}
 // ///////////////////////////////////////////////////////////////////////////////////////
 	/**
-	 * gets the Tweet by content
+	 * gets the RamChip by product name
 	 *
 	 * @param PDO $pdo PDO connection object
-	 * @param string $tweetContent tweet content to search for
-	 * @return SplFixedArray all Tweets found for this content
+	 * @param string $productName product name to search for
+	 * @return SplFixedArray all RamChipS found for this name
 	 * @throws PDOException when mySQL related errors occur
 	 **/
-	public static function getTweetByTweetContent(PDO $pdo, $tweetContent) {
+	public static function getProductByProductName(PDO $pdo, $productName) {
 		// sanitize the description before searching
-		$tweetContent = trim($tweetContent);
-		$tweetContent = filter_var($tweetContent, FILTER_SANITIZE_STRING);
-		if(empty($tweetContent) === true) {
-			throw(new PDOException("tweet content is invalid"));
+		$productName = trim($productName);
+		$productName = filter_var($productName, FILTER_SANITIZE_STRING);
+		if(empty($productName) === true) {
+			throw(new PDOException("product name is invalid"));
 		}
 
 		// create query template
-		$query	 = "SELECT tweetId, profileId, tweetContent, tweetDate FROM tweet WHERE tweetContent LIKE :tweetContent";
+		$query	 = "SELECT productId, productName, manufacturerName, modelName, price FROM ramChip WHERE productName LIKE :productName";
 		$statement = $pdo->prepare($query);
 
-		// bind the tweet content to the place holder in the template
-		$tweetContent = "%$tweetContent%";
-		$parameters = array("tweetContent" => $tweetContent);
+		// bind the product name to the place holder in the template
+		$productName = "%$productName%";
+		$parameters = array("productName" => $productName);
 		$statement->execute($parameters);
 
-		// build an array of tweets
-		$tweets = new SplFixedArray($statement->rowCount());
+		// build an array of RamChipS
+		$ramChipS = new SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$tweet = new Tweet($row["tweetId"], $row["profileId"], $row["tweetContent"], $row["tweetDate"]);
-				$tweets[$tweets->key()] = $tweet;
-				$tweets->next();
+				$ramChip = new RamChip($row["productId"], $row["productName"], $row["manufacturerName"], $row["modelName"], $row["price"]);
+				$ramChipS[$ramChipS->key()] = $ramChip;
+				$ramChipS->next();
 			} catch(Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($tweets);
+		return($ramChipS);
 	}
 
 	/**
