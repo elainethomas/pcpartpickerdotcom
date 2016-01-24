@@ -20,17 +20,17 @@ class RamChip {
 	private $productName;
 	/**
 	 * product manufacturer name
-	 * @var string $manufacturer
+	 * @var string $manufacturerName
 	 */
 	private $manufacturerName;
 	/**
 	 * the particular design or version of product
-	 * @var string $model
+	 * @var string $modelName
 	 */
 	private $modelName;
 	/**
 	 * the sale price supplied by manufacturer
-	 * @var int $price
+	 * @var double $price
 	 */
 	private $price;
 
@@ -39,12 +39,13 @@ class RamChip {
 	 *
 	 * @param int $newProductId id of this RamChip or null if a new RamChip
 	 * @param string $newProductName string containing the product name
-	 * @param $newManufacturerName
+	 * @param string $newManufacturerName
 	 * @param string $newModelName string containing the product name
-	 * @param int $newPrice current sale price of product
+	 * @param double $newPrice current sale price of product
+	 * @throws InvalidArgumentException if data types are not valid
+	 * @throws RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 	 * @throws Exception if some other exception is thrown
-	 * @internal param string $newManufacturer string containing the name of the product manufacturer
-	 */
+	 **/
 	public function __construct($newProductId, $newProductName, $newManufacturerName, $newModelName, $newPrice = null) {
 		try {
 			$this->setProductId($newProductId);
@@ -126,7 +127,7 @@ class RamChip {
 				throw(new InvalidArgumentException("product name content is empty or insecure"));
 			}
 
-			// verify the tweet content will fit in the database
+			// verify the product name will fit in the database
 			if(strlen($newProductName) > 128) {
 				throw(new RangeException("product name content too large"));
 			}
@@ -155,18 +156,18 @@ class RamChip {
 		// verify the manufacturer name content is secure
 		$newManufacturerName = trim($newManufacturerName);
 		$newManufacturerName = filter_var($newManufacturerName,FILTER_SANITIZE_STRING);
-			if(empty($newManufacturerName) === true) {
-				throw(new InvalidArgumentException("manufacturer name content is empty or insecure"));
-			}
+		if(empty($newManufacturerName) === true) {
+			throw(new InvalidArgumentException("manufacturer name content is empty or insecure"));
+		}
 
 		// verify the manufacturer name content will fit in the database
-			if(strlen($newManufacturerName) > 128) {
-				throw(new RangeException("manufacturer name content too large"));
+		if(strlen($newManufacturerName) > 128) {
+			throw(new RangeException("manufacturer name content too large"));
 			}
 
-			// store the manufacturer name content
-			$this->manufacturerName = $newManufacturerName;
-		}
+		// store the manufacturer name content
+		$this->manufacturerName = $newManufacturerName;
+	}
 
 	/**
 	 * accessor method for model name content
@@ -235,8 +236,6 @@ class RamChip {
 
 }
 
-	// ///////////////////////////////////////////////////////////////
-
 	/**
 	 * inserts this RamChip into mySQL
 	 *
@@ -301,9 +300,92 @@ class RamChip {
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = array("productName" => $this->productName, "manufacturerName" => $this->manufacturerName, "modelName" => $modelName, "price" => $this->price);
+		$parameters = array("productName" => $this->productName, "manufacturerName" => $this->manufacturerName, "modelName" => $this->modelName, "price" => $this->price);
 		$statement->execute($parameters);
 
+	}
+// ///////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * gets the Tweet by content
+	 *
+	 * @param PDO $pdo PDO connection object
+	 * @param string $tweetContent tweet content to search for
+	 * @return SplFixedArray all Tweets found for this content
+	 * @throws PDOException when mySQL related errors occur
+	 **/
+	public static function getTweetByTweetContent(PDO $pdo, $tweetContent) {
+		// sanitize the description before searching
+		$tweetContent = trim($tweetContent);
+		$tweetContent = filter_var($tweetContent, FILTER_SANITIZE_STRING);
+		if(empty($tweetContent) === true) {
+			throw(new PDOException("tweet content is invalid"));
+		}
+
+		// create query template
+		$query	 = "SELECT tweetId, profileId, tweetContent, tweetDate FROM tweet WHERE tweetContent LIKE :tweetContent";
+		$statement = $pdo->prepare($query);
+
+		// bind the tweet content to the place holder in the template
+		$tweetContent = "%$tweetContent%";
+		$parameters = array("tweetContent" => $tweetContent);
+		$statement->execute($parameters);
+
+		// build an array of tweets
+		$tweets = new SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$tweet = new Tweet($row["tweetId"], $row["profileId"], $row["tweetContent"], $row["tweetDate"]);
+				$tweets[$tweets->key()] = $tweet;
+				$tweets->next();
+			} catch(Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($tweets);
+	}
+
+	/**
+	 * gets the Tweet by tweetId
+	 *
+	 * @param PDO $pdo PDO connection object
+	 * @param int $tweetId tweet id to search for
+	 * @return mixed Tweet found or null if not found
+	 * @throws PDOException when mySQL related errors occur
+	 **/
+	public static function getTweetByTweetId(PDO $pdo, $tweetId) {
+		// sanitize the tweetId before searching
+		$tweetId = filter_var($tweetId, FILTER_VALIDATE_INT);
+		if($tweetId === false) {
+			throw(new PDOException("tweet id is not an integer"));
+		}
+		if($tweetId <= 0) {
+			throw(new PDOException("tweet id is not positive"));
+		}
+
+		// create query template
+		$query	 = "SELECT tweetId, profileId, tweetContent, tweetDate FROM tweet WHERE tweetId = :tweetId";
+		$statement = $pdo->prepare($query);
+
+		// bind the tweet id to the place holder in the template
+		$parameters = array("tweetId" => $tweetId);
+		$statement->execute($parameters);
+
+		// grab the tweet from mySQL
+
+		try {
+			$tweet = null;
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$row   = $statement->fetch();
+			if($row !== false) {
+				$tweet = new Tweet($row["tweetId"], $row["profileId"], $row["tweetContent"], $row["tweetDate"]);
+			}
+		} catch(Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($tweet);
 	}
 }
 
