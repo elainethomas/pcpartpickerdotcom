@@ -203,9 +203,9 @@ class RamChip {
 	}
 
 	/**
-	 * accessor method for model name content
+	 * accessor method for price value
 	 *
-	 * @return int value model name
+	 * @return double price value
 	 **/
 	public function getPrice() {
 		return($this->price);
@@ -246,7 +246,7 @@ class RamChip {
 	public function insert(PDO $pdo) {
 		// enforce the productId is null (i.e., don't insert a product id that already exists)
 		if($this->productId !== null) {  //**IT NEEDS TO NOT EXIST!!
-			throw(new PDOException("not a new product id"));
+			throw(new PDOException("not a new ram chip"));
 			//DO NOT INSERT THE SAME KEY TWICE
 		}
 
@@ -259,52 +259,51 @@ class RamChip {
 		$parameters = array("productName" => $this->productName, "manufacturerName" => $this->manufacturerName, "modelName" => $this->modelName, "price" => $this->price);
 		$statement->execute($parameters); //EXECUTE IS THE LIVE STEP TO THE DATABASE
 
-		// update the null tweetId with what mySQL just gave us
-		$this->tweetId = intval($pdo->lastInsertId()); //this permanently resolves the "EXISTENTIAL PROBLEM"
+		// update the null productId with what mySQL just gave us
+		$this->productId = doubleval($pdo->lastInsertId()); //this permanently resolves the "EXISTENTIAL PROBLEM"
 	}
 
-
 	/**
-	 * deletes this Tweet from mySQL
+	 * deletes this RamChip from mySQL
 	 *
 	 * @param PDO $pdo PDO connection object
 	 * @throws PDOException when mySQL related errors occur
 	 **/
 	public function delete(PDO $pdo) {
-		// enforce the tweetId is not null (i.e., don't delete a tweet that hasn't been inserted)
-		if($this->tweetId === null) {  //**IT NEEDS TO BE SURE IT DOES EXIST
-			throw(new PDOException("unable to delete a tweet that does not exist"));
+		// enforce the productId is not null (i.e., don't delete a tweet that hasn't been inserted)
+		if($this->productId === null) {  //**IT NEEDS TO BE SURE IT DOES EXIST
+			throw(new PDOException("unable to delete a ram chip that does not exist"));
 		}
 
 		// create query template
-		$query	 = "DELETE FROM tweet WHERE tweetId = :tweetId";  //WITHOUT THE WHERE CLAUSE IT WILL DELETE ALL TWEETS
+		$query	 = "DELETE FROM ramChip WHERE productId = :productId";  //WITHOUT THE WHERE CLAUSE IT WILL DELETE ALL TWEETS
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holder in the template
-		$parameters = array("tweetId" => $this->tweetId);
+		$parameters = array("productId" => $this->productId);
 		$statement->execute($parameters);
 	}
 
 	/**
-	 * updates this Tweet in mySQL
+	 * updates this RamChip in mySQL
 	 *
 	 * @param PDO $pdo PDO connection object
 	 * @throws PDOException when mySQL related errors occur
 	 **/
 	public function update(PDO $pdo) {
-		// enforce the tweetId is not null (i.e., don't update a tweet that hasn't been inserted)
-		if($this->tweetId === null) {
-			throw(new PDOException("unable to update a tweet that does not exist"));
+		// enforce the productId is not null (i.e., don't update a tweet that hasn't been inserted)
+		if($this->productId === null) {
+			throw(new PDOException("unable to update a ram chip that does not exist"));
 		}
 
 		// create query template  **IF THERE IS NO WHERE CLAUSE IT WILL UPDATE THE WHOLE THING
-		$query	 = "UPDATE tweet SET profileId = :profileId, tweetContent = :tweetContent, tweetDate = :tweetDate WHERE tweetId = :tweetId";
+		$query	 = "UPDATE ramChip SET productId = :productId, productName = :productName, manufacturerName = :manufacturerName, modelName = :modelName, price = :price WHERE productId = :productId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$formattedDate = $this->tweetDate->format("Y-m-d H:i:s");
-		$parameters = array("profileId" => $this->profileId, "tweetContent" => $this->tweetContent, "tweetDate" => $formattedDate, "tweetId" => $this->tweetId);
+		$parameters = array("productName" => $this->productName, "manufacturerName" => $this->manufacturerName, "modelName" => $modelName, "price" => $this->price);
 		$statement->execute($parameters);
 
 	}
+}
 
