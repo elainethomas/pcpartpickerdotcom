@@ -1,7 +1,4 @@
 <?php
-require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
-require_once("ramchip.php");
-$pdo = connectToEncryptedMySQL("/etc/apache2/data-design/enajera2.ini");
 
 /**
  * RamChip, a temporary memory module
