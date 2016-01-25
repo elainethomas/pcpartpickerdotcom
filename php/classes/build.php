@@ -224,16 +224,16 @@ class Build {
 		}
 
 		// create query template
-		$query	 = "INSERT INTO Build(profileId, productId, productName) VALUES(:productName, :manufacturerName, :modelName, :price)";
+		$query	 = "INSERT INTO Build(profileId, productId, productName) VALUES(:profileId, :productId, :productName)";
 		$statement = $pdo->prepare($query);
 		//THERE IS NO PRIMARY KEY HERE BC WE ARE GOING TO INSERT IT
 
 		// bind the member variables to the place holders in the template
-		$parameters = array("productName" => $this->productName, "manufacturerName" => $this->manufacturerName, "modelName" => $this->modelName, "price" => $this->price);
+		$parameters = array("buildId" => $this->profileId, "productId" => $this->productId, "productName" => $this->productName);
 		$statement->execute($parameters); //EXECUTE IS THE LIVE STEP TO THE DATABASE
 
-		// update the null productId with what mySQL just gave us
-		$this->productId = doubleval($pdo->lastInsertId()); //this permanently resolves the "EXISTENTIAL PROBLEM"
+		// update the null buildId with what mySQL just gave us
+		$this->buildId = intval($pdo->lastInsertId()); //this permanently resolves the "EXISTENTIAL PROBLEM"
 	}
 
 	/**
