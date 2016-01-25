@@ -3,61 +3,52 @@
 
 // require_once ("autoload.php");
 
-
 /**
- * RamChip, a temporary memory module
+ * Build, a list of parts
  *
- *A RamChip refers to RAM (random access memory) pluggable, essential computer component.
- *A RamChip is a saleable product.
+ *A Build refers to a completed build that used a specified product.
  *
  *@author Elaine Thomas <enajera2@cnm.edu>
  **/
-class RamChip {
+class Build {
 	/**
-	 * id for this RamChip; this is the primary key
+	 * id for this Build; this is the primary key
+	 * @var int $buildId
+	 **/
+	private $buildId;
+	/**
+	 * id for profile who created build
+	 * @var int $profileId
+	 **/
+	private $profileId;
+	/**
+	 * id for the product(s) included in this build
 	 * @var int $productId
-	 **/
-	private $productId;
-	/**
-	 *product name supplied by manufacturer
-	 *@var string $productName
-	 **/
-	private $productName;
-	/**
-	 * product manufacturer name
-	 * @var string $manufacturerName
 	 */
-	private $manufacturerName;
+	private $productId;
 	/**
 	 * the particular design or version of product
 	 * @var string $modelName
 	 */
-	private $modelName;
-	/**
-	 * the sale price supplied by manufacturer
-	 * @var double $price
-	 */
-	private $price;
+	private $productName;
 
 	/**
-	 *constructor for this RamChip
+	 *constructor for this Build
 	 *
-	 * @param int $newProductId id of this RamChip or null if a new RamChip
+	 * @param int $newBuildId id of this Build
+	 * @param int $newProfileId id of the user who created the build
+	 * @param int $newProductId id of the product included in the build
 	 * @param string $newProductName string containing the product name
-	 * @param string $newManufacturerName
-	 * @param string $newModelName string containing the product name
-	 * @param double $newPrice current sale price of product
 	 * @throws InvalidArgumentException if data types are not valid
 	 * @throws RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 	 * @throws Exception if some other exception is thrown
 	 **/
-	public function __construct($newProductId, $newProductName, $newManufacturerName, $newModelName, $newPrice = null) {
+	public function __construct( $newBuildId, $newProfileId, $newProductId, $newProductName) {
 		try {
+			$this->setBuildId($newBuildId);
 			$this->setProductId($newProductId);
+			$this->setProfileId($newProfileId);
 			$this->setProductName($newProductName);
-			$this->setManufacturerName($newManufacturerName);
-			$this->setModelName($newModelName);
-			$this->setPrice($newPrice);
 		} catch(InvalidArgumentException $invalidArgument) {
 			// rethrow the exception to the caller
 			throw(new InvalidArgumentException($invalidArgument->getMessage(), 0, $invalidArgument));
@@ -68,6 +59,84 @@ class RamChip {
 			// rethrow generic exception
 			throw(new Exception($exception->getMessage(), 0, $exception));
 		}
+	}
+
+	/**
+	 *accessor method for build id
+	 *
+	 *@return int value of build id
+	 **/
+	public function getBuildId () {
+		return($this->buildId);
+	}
+
+	/**
+	 * mutator method for build id
+	 *
+	 * @param int $newbuildId new value of build id
+	 * @throws InvalidArgumentException if product id is not an integer
+	 * @throws RangeException if product id is negative
+	 **/
+	public function setBuildId($newBuildId) {
+		// base case: if the build id is null, this is a new build without a mySQL assigned id (yet)
+		if($newBuildId === null) {
+			$this->buildId = null;
+			return;
+		}
+
+		// verify the build id is valid
+		$newBuildId = filter_var($newBuildId, FILTER_VALIDATE_INT);
+		if($newBuildId === false) {
+			throw(new InvalidArgumentException("build id is not a valid integer"));
+		}
+
+		//verify the build id is positive
+		if($newBuildId <= 0) {
+			throw(new RangeException ("build id is not positive"));
+		}
+
+		//convert and store the build id
+		$this->buildId = intval($newBuildId);
+	}
+
+	/**
+	 *accessor method for profile id
+	 *
+	 *@return int value of profile id
+	 **/
+	public function getProfileId () {
+		return($this->profileId);
+	}
+
+	/**
+	 * mutator method for profile id
+	 *
+	 * @param int $newProfileId new value of profile id
+	 * @throws InvalidArgumentException if profile id is not an integer
+	 * @throws RangeException if product id is negative
+	 **/
+
+	public function setProfileId($newProfileId) {
+		/**	// base case: if the profile id is null, this is a new profile without a mySQL assigned id (yet)
+		 // I don't think I need this piece of code for this attribute
+		if($newProfileId === null) {
+			$this->profileId = null;
+			return;
+		}
+		**/
+		// verify the profile id is valid
+		$newProfileId = filter_var($newProfileId, FILTER_VALIDATE_INT);
+		if($newProfileId === false) {
+			throw(new InvalidArgumentException("profile id is not a valid integer"));
+		}
+
+		//verify the profile id is positive
+		if($newProfileId <= 0) {
+			throw(new RangeException ("profile id is not positive"));
+		}
+
+		//convert and store the profile id
+		$this->profileId = intval($newProfileId);
 	}
 
 	/**
@@ -99,12 +168,12 @@ class RamChip {
 			throw(new InvalidArgumentException("product id is not a valid integer"));
 		}
 
-	//verify the product id is positive
+		//verify the product id is positive
 		if($newProductId <= 0) {
 			throw(new RangeException ("product id is not positive"));
 		}
 
-	//convert and store the product id
+		//convert and store the product id
 		$this->productId = intval($newProductId);
 	}
 
@@ -114,8 +183,8 @@ class RamChip {
 	 * @return string value of product name content
 	 **/
 	public function getProductName() {
-			return($this->productName);
-		}
+		return($this->productName);
+	}
 
 	/**
 	 * mutator method for product name
@@ -125,136 +194,37 @@ class RamChip {
 	 * @throws RangeException if $newProductName is > 128 characters
 	 **/
 	public function setProductName($newProductName) {
-			// verify the product name content is secure
-			$newProductName = trim($newProductName);
-			$newProductName = filter_var($newProductName, FILTER_SANITIZE_STRING);
-			if(empty($newProductName) === true) {
-				throw(new InvalidArgumentException("product name content is empty or insecure"));
-			}
-
-			// verify the product name will fit in the database
-			if(strlen($newProductName) > 128) {
-				throw(new RangeException("product name content too large"));
-			}
-
-			// store the product name content
-			$this->productName = $newProductName;
-		}
-
-	/**
-	 * accessor method for manufacturer name content
-	 *
-	 * @return string value manufacturer name
-	 **/
-	public function getManufacturerName() {
-		return($this->manufacturerName);
-	}
-
-	/**
-	 * mutator method for manufacturer name
-	 *
-	 * @param string $newManufacturerName
-	 * @throws InvalidArgumentException if $newManufacturerName is not a string or insecure
-	 * @throws RangeException if $newManufacturerName is > 128 characters
-	 **/
-	public function setManufacturerName($newManufacturerName) {
-		// verify the manufacturer name content is secure
-		$newManufacturerName = trim($newManufacturerName);
-		$newManufacturerName = filter_var($newManufacturerName,FILTER_SANITIZE_STRING);
-		if(empty($newManufacturerName) === true) {
-			throw(new InvalidArgumentException("manufacturer name content is empty or insecure"));
-		}
-
-		// verify the manufacturer name content will fit in the database
-		if(strlen($newManufacturerName) > 128) {
-			throw(new RangeException("manufacturer name content too large"));
-			}
-
-		// store the manufacturer name content
-		$this->manufacturerName = $newManufacturerName;
-	}
-
-	/**
-	 * accessor method for model name content
-	 *
-	 * @return string value model name
-	 **/
-	public function getModelName() {
-		return($this->modelName);
-	}
-
-	/**
-	 * mutator method for model name
-	 *
-	 * @param string $newModelName
-	 * @throws InvalidArgumentException if $newModelName is not a string or insecure
-	 * @throws RangeException if $newModelName is > 128 characters
-	 **/
-
-	public function setModelName($newModelName) {
 		// verify the product name content is secure
-		$newModelName = trim($newModelName);
-		$newModelName = filter_var($newModelName,FILTER_SANITIZE_STRING);
-		if(empty($newModelName) === true) {
-			throw(new InvalidArgumentException("model name content is empty or insecure"));
+		$newProductName = trim($newProductName);  //removes all of the white space around it
+		$newProductName = filter_var($newProductName, FILTER_SANITIZE_STRING);
+		if(empty($newProductName) === true) {
+			throw(new InvalidArgumentException("product name content is empty or insecure"));
 		}
 
-		// verify the model name content will fit in the database
-		if(strlen($newModelName) > 128) {
-			throw(new RangeException("model name content too large"));
+		// verify the product name will fit in the database
+		if(strlen($newProductName) > 128) {
+			throw(new RangeException("product name content too large"));
 		}
 
-		// store the model name content
-		$this->modelName = $newModelName;
+		// store the product name content
+		$this->productName = $newProductName;
 	}
 
 	/**
-	 * accessor method for price value
-	 *
-	 * @return double price value
-	 **/
-	public function getPrice() {
-		return($this->price);
-	}
-
-	/**
-	 * mutator method for RamChip price
-	 *
-	 * @param double $newPrice new price of RamChip
-	 * @throws InvalidArgumentException if $newPrice is not a double
-	 * @throws RangeException if $newPrice is not positive
-	**/
-	public function setPrice($newPrice) {
-		// verify the price value is valid
-		$newPrice = filter_var($newPrice, FILTER_VALIDATE_INT);
-		if($newPrice === false) {
-			throw(new InvalidArgumentException("price value is not a valid integer"));
-		}
-
-		// verify the price value is positive
-		if($newPrice <= 0) {
-			throw(new RangeException("price value cannot be negative"));
-		}
-
-		// convert and store the price value
-		$this->price = doubleval($newPrice);
-	}
-
-	/**
-	 * inserts this RamChip into mySQL
+	 * inserts this Build into mySQL
 	 *
 	 * @param PDO $pdo PDO connection object
 	 * @throws PDOException when mySQL related errors occur
 	 **/
 	public function insert(PDO $pdo) {
-		// enforce the productId is null (i.e., don't insert a product id that already exists)
-		if($this->productId !== null) {  //**IT NEEDS TO NOT EXIST!!
-			throw(new PDOException("not a new ram chip"));
+		// enforce the buildId is null (i.e., don't insert a build id that already exists)
+		if($this->buildId !== null) {  //**IT NEEDS TO NOT EXIST!!
+			throw(new PDOException("this build id already exists"));
 			//DO NOT INSERT THE SAME KEY TWICE
 		}
 
 		// create query template
-		$query	 = "INSERT INTO ramChip(productName, manufacturerName, modelName, price ) VALUES(:productName, :manufacturerName, :modelName, :price)";
+		$query	 = "INSERT INTO Build(profileId, productId, productName) VALUES(:productName, :manufacturerName, :modelName, :price)";
 		$statement = $pdo->prepare($query);
 		//THERE IS NO PRIMARY KEY HERE BC WE ARE GOING TO INSERT IT
 
