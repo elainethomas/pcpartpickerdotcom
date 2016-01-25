@@ -105,9 +105,9 @@ class RamChip {
 	}
 
 	/**
-	 * accessor method for tweet content
+	 * accessor method for product name content
 	 *
-	 * @return string value of tweet content
+	 * @return string value of product name content
 	 **/
 	public function getProductName() {
 			return($this->productName);
@@ -133,12 +133,12 @@ class RamChip {
 				throw(new RangeException("product name content too large"));
 			}
 
-			// store the tweet content
+			// store the product name content
 			$this->productName = $newProductName;
 		}
 
 	/**
-	 * accessor method for manufacturer content
+	 * accessor method for manufacturer name content
 	 *
 	 * @return string value manufacturer name
 	 **/
@@ -270,7 +270,7 @@ class RamChip {
 	 * @throws PDOException when mySQL related errors occur
 	 **/
 	public function delete(PDO $pdo) {
-		// enforce the productId is not null (i.e., don't delete a tweet that hasn't been inserted)
+		// enforce the productId is not null (i.e., don't delete a ram chip that hasn't been inserted)
 		if($this->productId === null) {  //**IT NEEDS TO BE SURE IT DOES EXIST
 			throw(new PDOException("unable to delete a ram chip that does not exist"));
 		}
@@ -291,7 +291,7 @@ class RamChip {
 	 * @throws PDOException when mySQL related errors occur
 	 **/
 	public function update(PDO $pdo) {
-		// enforce the productId is not null (i.e., don't update a tweet that hasn't been inserted)
+		// enforce the productId is not null (i.e., don't update a ram chip that hasn't been inserted)
 		if($this->productId === null) {
 			throw(new PDOException("unable to update a ram chip that does not exist"));
 		}
@@ -313,12 +313,12 @@ class RamChip {
 	 * @return SplFixedArray all RamChipS found for this name
 	 * @throws PDOException when mySQL related errors occur
 	 **/
-	public static function getRamChipByProductName(PDO $pdo, $productName) {
+	public static function getRamChipByProductName(\PDO $pdo, string $productName) {
 		// sanitize the description before searching
 		$productName = trim($productName);
 		$productName = filter_var($productName, FILTER_SANITIZE_STRING);
 		if(empty($productName) === true) {
-			throw(new PDOException("product name is invalid"));
+			throw(new \PDOException("product name is invalid"));
 		}
 
 		// create query template
@@ -330,20 +330,20 @@ class RamChip {
 		$parameters = array("productName" => $productName);
 		$statement->execute($parameters);
 
-		// build an array of RamChipS
-		$ramChipS = new SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(PDO::FETCH_ASSOC);
+		// build an array of  ram chips
+		$ramChips = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$ramChip = new RamChip($row["productId"], $row["productName"], $row["manufacturerName"], $row["modelName"], $row["price"]);
-				$ramChipS[$ramChipS->key()] = $ramChip;
-				$ramChipS->next();
+				$ramChips[$ramChips->key()] = $ramChip;
+				$ramChips->next();
 			} catch(Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($ramChipS);
+		return($ramChips);
 	}
 
 	/**
@@ -355,7 +355,7 @@ class RamChip {
 	 * @throws PDOException when mySQL related errors occur
 	 **/
 	public static function getRamChipByProductId(PDO $pdo, $productId) {
-		// sanitize the tweetId before searching
+		// sanitize the productId before searching
 		$productId = filter_var($productId, FILTER_VALIDATE_INT);
 		if($productId === false) {
 			throw(new PDOException("product id is not an integer"));
@@ -372,7 +372,7 @@ class RamChip {
 		$parameters = array("productId" => $productId);
 		$statement->execute($parameters);
 
-		// grab the tweet from mySQL
+		// grab the ram chip from mySQL
 
 		try {
 			$ramChip = null;
@@ -389,32 +389,32 @@ class RamChip {
 	}
 
 	/**
-	 * gets all Tweets
+	 * gets all ram chips
 	 *
 	 * @param PDO $pdo PDO connection object
-	 * @return SplFixedArray all RamChipS found
+	 * @return SplFixedArray all RamChips found
 	 * @throws PDOException when mySQL related errors occur
 	 **/
-	public static function getAllRamChipS(PDO $pdo) {
+	public static function getAllRamChips(\PDO $pdo) {
 		// create query template
 		$query = "SELECT productId, productName, manufacturerName, modelName, price FROM ramChip";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
-		// build an array of tweets
-		$ramChipS = new SplFixedArray($statement->rowCount());
+		// build an array of ram chips
+		$ramChips = new SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$ramChip = new RamChip($row["productId"], $row["productName"], $row["manufacturerName"], $row["modelName"], $row["price"]);
-				$ramChipS[$ramChipS->key()] = $ramChip;
+				$ramChips[$ramChips->key()] = $ramChip;
 				$ramChip->next();
 			} catch(Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return($ramChipS);
+		return($ramChips);
 	}
 }
 
