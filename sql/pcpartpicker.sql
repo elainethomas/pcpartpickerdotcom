@@ -1,5 +1,5 @@
 DROP TABLE IF EXISTS ratings;
-DROP TABLE IF EXISTS builds;
+DROP TABLE IF EXISTS build;
 DROP TABLE IF EXISTS ramChip;
 DROP TABLE IF EXISTS profile;
 
@@ -14,16 +14,16 @@ CREATE TABLE profile (
 );
 
 CREATE TABLE ramChip (
-	price INT UNSIGNED NOT NULL,
 	productId INT UNSIGNED AUTO_INCREMENT NOT NULL,
-	model VARCHAR (128),
-	manufacturer VARCHAR(128),
-	productName VARCHAR(128) NOT NULL ,
+	productName VARCHAR(128) NOT NULL,
+	manufacturerName VARCHAR(128),
+	modelName VARCHAR (128),
+	price INT UNSIGNED NOT NULL,
 	UNIQUE (productId),
 	PRIMARY KEY (productId)
 );
 
-CREATE TABLE builds (
+CREATE TABLE build (
 	buildId INT UNSIGNED AUTO_INCREMENT NOT NULL,
 	profileId INT UNSIGNED NOT NULL,
 	productId INT UNSIGNED NOT NULL,

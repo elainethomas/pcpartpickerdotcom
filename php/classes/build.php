@@ -224,7 +224,7 @@ class Build {
 		}
 
 		// create query template
-		$query	 = "INSERT INTO Build(profileId, productId, productName) VALUES(:profileId, :productId, :productName)";
+		$query	 = "INSERT INTO build(profileId, productId, productName) VALUES(:profileId, :productId, :productName)";
 		$statement = $pdo->prepare($query);
 		//THERE IS NO PRIMARY KEY HERE BC WE ARE GOING TO INSERT IT
 
@@ -237,61 +237,61 @@ class Build {
 	}
 
 	/**
-	 * deletes this RamChip from mySQL
+	 * deletes this Build from mySQL
 	 *
 	 * @param PDO $pdo PDO connection object
 	 * @throws PDOException when mySQL related errors occur
 	 **/
 	public function delete(PDO $pdo) {
 		// enforce the productId is not null (i.e., don't delete a ram chip that hasn't been inserted)
-		if($this->productId === null) {  //**IT NEEDS TO BE SURE IT DOES EXIST
-			throw(new PDOException("unable to delete a ram chip that does not exist"));
+		if($this->buildId === null) {  //**IT NEEDS TO BE SURE IT DOES EXIST
+			throw(new PDOException("unable to delete a build that does not exist"));
 		}
 
 		// create query template
-		$query	 = "DELETE FROM ramChip WHERE productId = :productId";  //WITHOUT THE WHERE CLAUSE IT WILL DELETE ALL TWEETS
+		$query	 = "DELETE FROM build WHERE buildId = :buildId";  //WITHOUT THE WHERE CLAUSE IT WILL DELETE ALL TWEETS
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holder in the template
-		$parameters = array("productId" => $this->productId);
+		$parameters = array("buildId" => $this->builId);
 		$statement->execute($parameters);
 	}
 
 	/**
-	 * updates this RamChip in mySQL
+	 * updates this Build in mySQL
 	 *
 	 * @param PDO $pdo PDO connection object
 	 * @throws PDOException when mySQL related errors occur
 	 **/
 	public function update(PDO $pdo) {
-		// enforce the productId is not null (i.e., don't update a ram chip that hasn't been inserted)
-		if($this->productId === null) {
-			throw(new PDOException("unable to update a ram chip that does not exist"));
+		// enforce the buildId is not null (i.e., don't update a build that hasn't been inserted)
+		if($this->buildId === null) {
+			throw(new PDOException("unable to update a build that does not exist"));
 		}
 
 		// create query template  **IF THERE IS NO WHERE CLAUSE IT WILL UPDATE THE WHOLE THING
-		$query	 = "UPDATE ramChip SET productId = :productId, productName = :productName, manufacturerName = :manufacturerName, modelName = :modelName, price = :price WHERE productId = :productId";
+		$query	 = "UPDATE build SET buildId = :buildId, profileId = :profileId, productId = :productId, productName = :productName WHERE builId = :buildId";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holders in the template
-		$parameters = array("productName" => $this->productName, "manufacturerName" => $this->manufacturerName, "modelName" => $this->modelName, "price" => $this->price);
+		$parameters = array("buildId" => $this->profileId, "productId" => $this->productId, "productName" => $this->productName);
 		$statement->execute($parameters);
 	}
 
 	/**
-	 * gets the RamChip by product name
+	 * gets the RamChip by product id
 	 *
 	 * @param PDO $pdo PDO connection object
-	 * @param string $productName product name to search for
-	 * @return SplFixedArray all RamChipS found for this name
+	 * @param int $productId product id to search for
+	 * @return SplFixedArray all builds found for this name
 	 * @throws PDOException when mySQL related errors occur
 	 **/
-	public static function getRamChipByProductName(\PDO $pdo, string $productName) {
+	public static function getBuildByProductId(PDO $pdo, string $productId) {
 		// sanitize the description before searching
-		$productName = trim($productName);
-		$productName = filter_var($productName, FILTER_SANITIZE_STRING);
-		if(empty($productName) === true) {
-			throw(new \PDOException("product name is invalid"));
+		$productId = trim($productId);
+		$productId = filter_var($productId, FILTER_VALIDATE_INT);
+		if(empty($productId) === true) {
+			throw(new PDOException("product id is invalid"));
 		}
 
 		// create query template
@@ -304,8 +304,8 @@ class Build {
 		$statement->execute($parameters);
 
 		// build an array of  ram chips
-		$ramChips = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		$ramChips = new SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$ramChip = new RamChip($row["productId"], $row["productName"], $row["manufacturerName"], $row["modelName"], $row["price"]);

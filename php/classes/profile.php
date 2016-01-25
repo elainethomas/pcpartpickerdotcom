@@ -12,7 +12,7 @@
  *
  *@author Elaine Thomas <enajera2@cnm.edu>
  **/
-class RamChip {
+class Profile {
 	/**
 	 * id for this RamChip; this is the primary key
 	 * @var int $productId

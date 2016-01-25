@@ -5,14 +5,14 @@
 
 
 /**
- * RamChip, a temporary memory module
+ * Ratings, a temporary memory module
  *
  *A RamChip refers to RAM (random access memory) pluggable, essential computer component.
  *A RamChip is a saleable product.
  *
  *@author Elaine Thomas <enajera2@cnm.edu>
  **/
-class RamChip {
+class Ratings {
 	/**
 	 * id for this RamChip; this is the primary key
 	 * @var int $productId
