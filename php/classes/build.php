@@ -279,23 +279,23 @@ class Build {
 	}
 
 	/**
-	 * gets the RamChip by product id
+	 * gets the Build by profileId
 	 *
-	 * @param PDO $pdo PDO connection object
-	 * @param int $productId product id to search for
-	 * @return SplFixedArray all builds found for this name
+	 * @param PDO $pdo pointer to PDO connection, by reference
+	 * @param int $profileId profile id to search for
+	 * @return mixed Build found or null if not found
 	 * @throws PDOException when mySQL related errors occur
 	 **/
-	public static function getBuildByProductId(PDO $pdo, string $productId) {
+	public static function getBuildByProfileId(PDO $pdo, string $profileId) {
 		// sanitize the description before searching
-		$productId = trim($productId);
-		$productId = filter_var($productId, FILTER_VALIDATE_INT);
-		if(empty($productId) === true) {
-			throw(new PDOException("product id is invalid"));
+		$profileId = trim($profileId);
+		$profileId = filter_var($profileId, FILTER_VALIDATE_INT);
+		if(empty($profileId) === true) {
+			throw(new PDOException("profile id is invalid"));
 		}
 
 		// create query template
-		$query	 = "SELECT productId, productName, manufacturerName, modelName, price FROM ramChip WHERE productName LIKE :productName";
+		$query	 = "SELECT buildId, productId, productName  FROM ramChip WHERE profileId LIKE :productName";
 		$statement = $pdo->prepare($query);
 
 		// bind the product name to the place holder in the template
