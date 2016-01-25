@@ -5,9 +5,9 @@
 
 
 /**
- * RamChip, a temporary memory module
+ * Profile, a temporary memory module
  *
- *A RamChip refers to RAM (random access memory) pluggable, essential computer component.
+ *A Profile refers to RAM (random access memory) pluggable, essential computer component.
  *A RamChip is a saleable product.
  *
  *@author Elaine Thomas <enajera2@cnm.edu>
