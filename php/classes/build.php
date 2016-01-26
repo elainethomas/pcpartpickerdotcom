@@ -288,21 +288,38 @@ class Build {
 	 **/
 	public static function getBuildByProfileId(PDO $pdo, string $profileId) {
 		// sanitize the description before searching
-		$profileId = trim($profileId);
 		$profileId = filter_var($profileId, FILTER_VALIDATE_INT);
-		if(empty($profileId) === true) {
-			throw(new PDOException("profile id is invalid"));
+		if($profileId === true) {
+			throw(new PDOException("profile id is not an integer"));
 		}
 
+		if($profileId <= 0) {
+			throw(new PDOException("profile id is not positive"));
+		}
 		// create query template
-		$query	 = "SELECT buildId, productId, productName  FROM ramChip WHERE profileId LIKE :productName";
+		$query	 = "SELECT buildId, profileId, productId, productName  FROM build WHERE profileId LIKE :profileId";
 		$statement = $pdo->prepare($query);
 
-		// bind the product name to the place holder in the template
-		$productName = "%$productName%";
-		$parameters = array("productName" => $productName);
+		// bind the profile id to the place holder in the template
+		$parameters = array("profileId" => $profileId);
 		$statement->execute($parameters);
 
+		// grab the tweet from mySQL
+		try {
+			$tweet = null;
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
+			$row   = $statement->fetch();
+			if($row !== false) {
+				$tweet = new Tweet($row["tweetId"], $row["profileId"], $row["tweetContent"], $row["tweetDate"]);
+			}
+		} catch(Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($tweet);
+
+// //////////////////////
+/**
 		// build an array of  ram chips
 		$ramChips = new SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -318,7 +335,7 @@ class Build {
 		}
 		return($ramChips);
 	}
-
+**/
 	/**
 	 * gets the RamChip by productId
 	 *
